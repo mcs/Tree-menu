@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu>
+  <item id="child1" label="menu.entry1" />
+  <item id="child2" label="menu.entry2">
+    <item id="child2_1" label="menu.entry3" />
+    <item id="child2_2" label="menu.entry4" />
+    <item label="menu.entry5" unknownProperty="testProp" />
+  </item>
+</menu>
