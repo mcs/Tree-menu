@@ -4,8 +4,6 @@ import java.io.StringReader;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.xml.stream.EventFilter;
 import javax.xml.stream.FactoryConfigurationError;
@@ -19,7 +17,7 @@ import javax.xml.stream.events.XMLEvent;
 
 /**
  * Creates a navigation menu based on an existing XML structure.
- * An example XML could look like this:
+ * An example self-explaining menu:
  * <pre>
  * &lt;?xml version="1.0" encoding="UTF-8"?&gt;
  * &lt;menu&gt;
@@ -34,7 +32,6 @@ import javax.xml.stream.events.XMLEvent;
  */
 public class XmlMenuFactory implements MenuFactory {
 
-  private static final Logger log = Logger.getLogger(XmlMenuFactory.class.getSimpleName());
   private String xml;
 
   @Override
@@ -42,10 +39,8 @@ public class XmlMenuFactory implements MenuFactory {
     try {
       return parse();
     } catch (XMLStreamException e) {
-      log.log(Level.SEVERE, e.getMessage(), e);
-      throw new MenuFactoryException("Provided XML stream invalid", e);
+      throw new MenuFactoryException("Provided XML stream is invalid", e);
     } catch (RuntimeException e) {
-      log.log(Level.SEVERE, e.getMessage(), e);
       throw new MenuFactoryException(e.getMessage(), e);
     }
   }
@@ -75,10 +70,10 @@ public class XmlMenuFactory implements MenuFactory {
         case XMLStreamConstants.START_ELEMENT:
           StartElement element = event.asStartElement();
           String elementName = element.getName().getLocalPart();
-          if (elementName.equals("menu") && top == null) {
+          if ("menu".equals(elementName) && top == null) {
             root = new MenuRoot("menu");
             top = root; // push
-          } else if (elementName.equals("item") && top != null) {
+          } else if ("item".equals(elementName) && top != null) {
             Map<String, String> map = new HashMap<String, String>();
             Iterator<?> attributes = element.getAttributes();
             while (attributes.hasNext()) {
