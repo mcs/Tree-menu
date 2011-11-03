@@ -46,7 +46,7 @@ public class SqlMenuFactoryTest {
     }
 
     @Test
-    public void buildNav1() throws Exception {
+    public void buildNav1() throws SQLException {
         // GIVEN
         stmt.executeUpdate("INSERT INTO navigation (id, parent_id, label) VALUES (1, null, 'menu.entry1')");
         stmt.executeUpdate("INSERT INTO navigation (id, parent_id, label) VALUES (2, null, 'menu.entry2')");
@@ -75,7 +75,7 @@ public class SqlMenuFactoryTest {
     }
 
     @Test(expected = MenuFactoryException.class)
-    public void buildWithInvalidSqlTable() throws Exception {
+    public void buildWithInvalidSqlTable() throws SQLException  {
         // GIVEN
         stmt.executeUpdate("INSERT INTO navigation (id, parent_id, label) VALUES (1, null, 'menu.entry1')");
         Map<String, String> columnPropertyMap = new HashMap<String, String>();

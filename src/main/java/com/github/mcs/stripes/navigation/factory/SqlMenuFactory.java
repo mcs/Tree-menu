@@ -12,18 +12,43 @@ import java.util.List;
 import java.util.Map;
 
 /**
- *
- * @author Marcus
+ * This factory allows to create a navigation menu via SQL connection.
+ * <p>
+ * It is expected that there is a table <tt>navigation</tt> which contains at least 
+ * the columns <tt>id INT, parent_id INT, label VARCHAR(255)</tt>. Additional 
+ * columns without any further configuration are allowed but will be ignored. 
+ * Columns that are intended to be menu properties must be configured with a 
+ * column-property map, where the key is the column name and the value is the 
+ * name of the property.
+ * 
+ * @author Marcus Krassmann
+ * @see #setConnection(java.sql.Connection) 
+ * @see #setColumnMapping(java.util.Map) 
  */
 public class SqlMenuFactory implements MenuFactory {
 
     private Connection connection;
     private Map<String, String> columnPropertyMap;
 
+    /** 
+     * Sets the database connection to use.
+     * 
+     * @param connection the SQL connection 
+     */
+    public void setConnection(Connection connection) {
+        this.connection = connection;
+    }
+
+    /**
+     * Allows to map additional table columns to menu properties, like
+     * <pre>("HREF_TARGET" => "hrefTarget")</pre>
+     * @param columnPropertyMap a map containing column and property names
+     */
     public void setColumnMapping(Map<String, String> columnPropertyMap) {
         this.columnPropertyMap = columnPropertyMap;
     }
 
+    /** Intermediate class for table rows. */
     private static class Item {
 
         public String id;
@@ -73,7 +98,7 @@ public class SqlMenuFactory implements MenuFactory {
         // now create connection between parents and children
         MenuRoot root = new MenuRoot("menu");
         MenuItem current;
-        for (Item item: items) {
+        for (Item item : items) {
             current = menuItems.get(item.id);
             if (item.parent == null) {
                 current.setParent(root);
@@ -86,9 +111,4 @@ public class SqlMenuFactory implements MenuFactory {
         // That's it - menu is initialized :-)
         return root;
     }
-
-    public void setConnection(Connection connection) {
-        this.connection = connection;
-    }
-// TODO 04174 689163 daniela
 }
