@@ -1,4 +1,6 @@
-package de.vattenfall.is.navigation;
+package com.github.mcs.stripes.navigation.factory;
+
+import com.github.mcs.stripes.navigation.MenuRoot;
 
 /**
  * Defines a generic factory for creating menu structures based on {@link MenuItem MenuItems}.

@@ -1,5 +1,7 @@
-package de.vattenfall.is.navigation;
+package com.hithub.mcs.stripes.navigation;
 
+import com.github.mcs.stripes.navigation.MenuRoot;
+import com.github.mcs.stripes.navigation.MenuItem;
 import static org.junit.Assert.*;
 
 import org.junit.Test;

@@ -1,5 +1,9 @@
-package de.vattenfall.is.navigation;
+package com.hithub.mcs.stripes.navigation.factory;
 
+import com.github.mcs.stripes.navigation.MenuRoot;
+import com.github.mcs.stripes.navigation.factory.MenuFactoryException;
+import com.github.mcs.stripes.navigation.factory.SqlMenuFactory;
+import com.github.mcs.stripes.navigation.MenuItem;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -11,7 +15,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class SqlMenuFactoryTest {
@@ -50,7 +53,7 @@ public class SqlMenuFactoryTest {
         stmt.executeUpdate("INSERT INTO navigation (id, parent_id, label) VALUES (3, 2, 'menu.entry3')");
         stmt.executeUpdate("INSERT INTO navigation (id, parent_id, label) VALUES (4, 2, 'menu.entry4')");
         stmt.executeUpdate("INSERT INTO navigation (id, parent_id, label, unknown_prop) VALUES (5, 2, 'menu.entry5', 'testProp')");
-        
+
         Map<String, String> columnPropertyMap = new HashMap<String, String>();
         columnPropertyMap.put("unknown_prop", "unknownProperty");
 
@@ -72,9 +75,17 @@ public class SqlMenuFactoryTest {
     }
 
     @Test(expected = MenuFactoryException.class)
-    @Ignore("DataSource needs to be configured")
     public void buildWithInvalidSqlTable() throws Exception {
-        factory.setConnection(connection);
+        // GIVEN
+        stmt.executeUpdate("INSERT INTO navigation (id, parent_id, label) VALUES (1, null, 'menu.entry1')");
+        Map<String, String> columnPropertyMap = new HashMap<String, String>();
+        columnPropertyMap.put("not_existing_prop", "illegalProperty");
+
+        // WHEN
+        factory.setColumnMapping(columnPropertyMap);
         factory.build();
+        
+        // THEN
+        /* Exception */
     }
 }

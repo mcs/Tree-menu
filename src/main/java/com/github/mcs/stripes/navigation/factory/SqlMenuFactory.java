@@ -1,5 +1,7 @@
-package de.vattenfall.is.navigation;
+package com.github.mcs.stripes.navigation.factory;
 
+import com.github.mcs.stripes.navigation.MenuItem;
+import com.github.mcs.stripes.navigation.MenuRoot;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;

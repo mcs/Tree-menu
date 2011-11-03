@@ -1,6 +1,10 @@
-package de.vattenfall.is.navigation;
+package com.hithub.mcs.stripes.navigation.factory;
 
-import de.vattenfall.is.util.FileUtil;
+import com.github.mcs.stripes.navigation.MenuRoot;
+import com.github.mcs.stripes.navigation.factory.MenuFactoryException;
+import com.github.mcs.stripes.navigation.factory.XmlMenuFactory;
+import com.github.mcs.stripes.navigation.MenuItem;
+import com.github.mcs.util.FileUtil;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
@@ -18,7 +22,7 @@ public class XmlMenuFactoryTest {
     @Test
     public void buildWithValidXml() throws Exception {
         // GIVEN
-        String xml = FileUtil.deliverXmlFromFile("nav1.xml");
+        String xml = FileUtil.readXmlFromFile("nav1.xml");
         factory.setXml(xml);
 
         // WHEN
@@ -39,7 +43,7 @@ public class XmlMenuFactoryTest {
 
     @Test(expected = MenuFactoryException.class)
     public void buildWithInvalidXml() throws Exception {
-        String xml = FileUtil.deliverXmlFromFile("navUnknownElement.xml");
+        String xml = FileUtil.readXmlFromFile("navUnknownElement.xml");
         factory.setXml(xml);
         factory.build();
     }

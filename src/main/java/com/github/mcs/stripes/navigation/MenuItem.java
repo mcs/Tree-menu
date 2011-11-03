@@ -1,4 +1,4 @@
-package de.vattenfall.is.navigation;
+package com.github.mcs.stripes.navigation;
 
 import java.util.ArrayList;
 import java.util.HashMap;

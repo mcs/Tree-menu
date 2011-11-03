@@ -1,4 +1,4 @@
-package de.vattenfall.is.navigation;
+package com.github.mcs.stripes.navigation;
 
 public class MenuRoot extends MenuItem {
 
