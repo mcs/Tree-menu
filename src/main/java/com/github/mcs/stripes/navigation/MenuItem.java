@@ -53,7 +53,7 @@ public class MenuItem {
         return String.format("%s::%s", parent.getId(), id);
     }
 
-    public String getProperty(String prop) {
+    public String getProp(String prop) {
         return properties.get(prop);
     }
 

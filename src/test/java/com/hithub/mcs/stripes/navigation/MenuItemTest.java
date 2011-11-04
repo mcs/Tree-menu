@@ -28,7 +28,7 @@ public class MenuItemTest {
 
   @Test
   public void getLabel() {
-    assertEquals(CHILD_LABEL, child.getProperty("label"));
+    assertEquals(CHILD_LABEL, child.getProp("label"));
     assertEquals("Root-Node::child", child.getId());
   }
 
