@@ -7,18 +7,12 @@ import java.util.Map;
 
 public class MenuItem {
 
-    protected String id;
-    private final String label;
+    protected final String id;
     private MenuItem parent;
     private List<MenuItem> children = new ArrayList<MenuItem>();
     private Map<String, String> properties = new HashMap<String, String>();
 
-    protected MenuItem(String label) {
-        this.label = label;
-    }
-
-    protected MenuItem(String id, String label) {
-        this(label);
+    protected MenuItem(String id) {
         this.id = id;
     }
 
@@ -28,28 +22,12 @@ public class MenuItem {
      * @param label the label (or label key if support for i18n is given)
      * @param parent the parent menu item
      */
-    public MenuItem(String label, MenuItem parent) {
-        this(label);
+    public MenuItem(String id, MenuItem parent) {
+        this(id);
         this.parent = parent;
         if (parent != null) {
             parent.children.add(this);
         }
-    }
-
-    /**
-     * Creates a new menu item with an id, a label and a parent menu item.
-     * Every menu item must have one and only one parent.
-     * @param id the item's id
-     * @param label the label (or label key if support for i18n is given)
-     * @param parent the parent menu item
-     */
-    public MenuItem(String id, String label, MenuItem parent) {
-        this(label, parent);
-        this.id = id;
-    }
-
-    public final String getLabel() {
-        return label;
     }
 
     public List<MenuItem> getChildren() {
@@ -72,8 +50,7 @@ public class MenuItem {
     }
 
     public String getId() {
-        String exposedId = id == null ? label : id;
-        return String.format("%s::%s", parent.getId(), exposedId);
+        return String.format("%s::%s", parent.getId(), id);
     }
 
     public String getProperty(String prop) {

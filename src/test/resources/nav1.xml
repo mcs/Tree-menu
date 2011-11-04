@@ -4,6 +4,6 @@
   <item id="child2" label="menu.entry2">
     <item id="child2_1" label="menu.entry3" />
     <item id="child2_2" label="menu.entry4" />
-    <item label="menu.entry5" unknownProperty="testProp" />
+    <item id="menu.entry5" label="menu.entry5" unknownProperty="testProp" />
   </item>
 </menu>

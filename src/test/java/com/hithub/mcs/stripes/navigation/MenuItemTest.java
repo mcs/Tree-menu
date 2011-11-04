@@ -2,6 +2,7 @@ package com.hithub.mcs.stripes.navigation;
 
 import com.github.mcs.stripes.navigation.MenuRoot;
 import com.github.mcs.stripes.navigation.MenuItem;
+import java.util.HashMap;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
@@ -11,18 +12,23 @@ public class MenuItemTest {
 
   private static final String ROOT_LABEL = "Root-Node";
   private static final String CHILD_LABEL = "Child-Node";
+  
   private MenuItem root;
   private MenuItem child;
 
   @Before
   public void init() {
     root = new MenuRoot(ROOT_LABEL);
-    child = new MenuItem("child", CHILD_LABEL, root);
+    root.setProperties(new HashMap<String, String>());
+    root.getProperties().put("label", ROOT_LABEL);
+    child = new MenuItem("child", root);
+    child.setProperties(new HashMap<String, String>());
+    child.getProperties().put("label", CHILD_LABEL);
   }
 
   @Test
   public void getLabel() {
-    assertEquals(CHILD_LABEL, child.getLabel());
+    assertEquals(CHILD_LABEL, child.getProperty("label"));
     assertEquals("Root-Node::child", child.getId());
   }
 
@@ -34,7 +40,7 @@ public class MenuItemTest {
 
   @Test
   public void getExistingId() {
-    MenuItem node = new MenuItem("myId", "myLabel", root);
+    MenuItem node = new MenuItem("myId", root);
     assertEquals(ROOT_LABEL + "::myId", node.getId());
   }
 

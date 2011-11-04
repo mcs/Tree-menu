@@ -82,7 +82,7 @@ public class XmlMenuFactory implements MenuFactory {
               Attribute attribute = (Attribute) attributes.next();
               map.put(attribute.getName().toString(), attribute.getValue());
             }
-            top = new MenuItem(map.remove("id"), map.remove("label"), top); // push
+            top = new MenuItem(map.remove("id"), top); // push
             top.setProperties(map);
           } else {
             throw new XMLStreamException("Unexpected XML element: " + elementName);

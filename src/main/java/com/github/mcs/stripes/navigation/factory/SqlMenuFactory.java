@@ -52,13 +52,11 @@ public class SqlMenuFactory implements MenuFactory {
     private static class Item {
 
         public String id;
-        public String label;
         public String parent;
         public Map<String, String> props = new HashMap<String, String>();
 
         public Item(String id, String label, String parent) {
             this.id = id;
-            this.label = label;
             this.parent = parent;
         }
     }
@@ -90,7 +88,7 @@ public class SqlMenuFactory implements MenuFactory {
             items.add(item);
             // In this round, parent is always null. 
             // Gets populated in second rount
-            menuItems.put(item.id, new MenuItem(item.id, item.label, null));
+            menuItems.put(item.id, new MenuItem(item.id, null));
         }
         rs.close();
         stmt.close();

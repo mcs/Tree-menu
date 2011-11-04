@@ -32,12 +32,12 @@ public class XmlMenuFactoryTest {
         assertEquals(2, root.getChildren().size());
         MenuItem child2 = root.getChildren().get(1);
         assertEquals("menu::child2", child2.getId());
-        assertEquals("menu.entry2", child2.getLabel());
+        assertEquals("menu.entry2", child2.getProperty("label"));
 
         assertEquals(3, child2.getChildren().size());
         MenuItem child5 = child2.getChildren().get(2);
         assertEquals("menu::child2::menu.entry5", child5.getId());
-        assertEquals("menu.entry5", child5.getLabel());
+        assertEquals("menu.entry5", child5.getProperty("label"));
         assertEquals("testProp", child5.getProperty("unknownProperty"));
     }
 
